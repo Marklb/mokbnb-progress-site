@@ -10,6 +10,7 @@ function Home() {
   return (
     <div>
       <p>
+        Hello
         This is an example single page app built
         with <a href={reactLink}>React</a> and {' '}
         <a href={reactRouterLink}>React&nbsp;Router</a> using {' '}

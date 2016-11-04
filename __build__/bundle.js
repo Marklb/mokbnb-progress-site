@@ -27905,7 +27905,7 @@
 	    _react2.default.createElement(
 	      'p',
 	      null,
-	      'This is an example single page app built with ',
+	      'Hello This is an example single page app built with ',
 	      _react2.default.createElement(
 	        'a',
 	        { href: reactLink },
