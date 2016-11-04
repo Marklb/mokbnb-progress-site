@@ -27950,7 +27950,7 @@
 	      null,
 	      _react2.default.createElement(
 	        _reactRouter.Link,
-	        { to: '/example' },
+	        { to: '/mokbnb-progress-site/example' },
 	        'Example page'
 	      )
 	    ),
@@ -27959,7 +27959,7 @@
 	      null,
 	      _react2.default.createElement(
 	        _reactRouter.Link,
-	        { to: '/example/two-deep?field1=foo&field2=bar#boom!' },
+	        { to: '/mokbnb-progress-site/example/two-deep?field1=foo&field2=bar#boom!' },
 	        'Example two deep with query and hash'
 	      )
 	    )
@@ -28046,7 +28046,7 @@
 	      null,
 	      _react2.default.createElement(
 	        _reactRouter.Link,
-	        { to: '/example/two-deep?field1=foo&field2=bar#boom!' },
+	        { to: '/mokbnb-progress-site/example/two-deep?field1=foo&field2=bar#boom!' },
 	        'Example two deep with query and hash'
 	      )
 	    )
@@ -28111,7 +28111,7 @@
 	      null,
 	      _react2.default.createElement(
 	        _reactRouter.Link,
-	        { to: '/example/two-deep' + queryString + hashFragment },
+	        { to: '/mokbnb-progress-site/example/two-deep' + queryString + hashFragment },
 	        linkText
 	      )
 	    );
