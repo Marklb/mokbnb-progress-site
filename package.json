@@ -3,7 +3,7 @@
   "version": "2.0.0",
   "description": "Single Page Apps for GitHub Pages",
   "scripts": {
-    "start": "webpack -d --watch & live-server --host=127.0.0.1 --port=8080 --entry-file=404.html"
+    "start": "webpack -d --watch & live-server --entry-file=404.html"
   },
   "repository": {
     "type": "git",
