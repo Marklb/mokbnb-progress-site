@@ -1,15 +1,9 @@
 /* eslint import/no-extraneous-dependencies: ["error", {"devDependencies": true}] */
 import webpack from 'webpack';
-import path from 'path';
 
 export default {
-  devtool: 'inline-source-map',
   context: __dirname,
-  entry: [
-    'webpack-dev-server/client?http://127.0.0.1:8080/',
-    'webpack/hot/only-dev-server',
-    './index.jsx'
-  ],
+  entry: './index.jsx',
   output: {
     path: `${__dirname}/__build__`,
     filename: 'bundle.js',
@@ -37,9 +31,6 @@ export default {
         }),
       ];
     }
-    return [
-      new webpack.HotModuleReplacementPlugin(),
-      new webpack.NoErrorsPlugin()
-    ];
+    return [];
   })(),
 };
