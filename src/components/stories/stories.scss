@@ -1,0 +1,87 @@
+@import "../common.scss";
+
+.stories-title {
+  color: rgba(230,230,230,1);
+  font-family: Hack, monospace;
+  font-size: 30px;
+  margin: 0 auto;
+  padding: 10px 0 10px 0;
+  display: block;
+  text-align: center;
+  @include user-select;
+  cursor: default;
+}
+
+.stories-container {
+  position: relative;
+  display: block;
+  margin: 0 auto;
+  // left: 30px;
+  // right: 30px;
+  width: 70%;
+
+  .spacer {
+    display: block;
+    height: 10px;
+  }
+}
+
+.no-stories-panel {
+  color: rgba(230,230,230,1);
+  font-family: Hack, monospace;
+  font-size: 16px;
+  text-align: center;
+  @include user-select;
+  cursor: default;
+
+  padding: 50px 5px 50px 5px;
+  display: block;
+  @include box-sizing(border-box);
+  border: 1px solid rgba(230,230,230,1);
+  border-radius: 2px;
+  // background-color: rgba(30,30,70,1);
+  background-color: rgba(30,30,50,1);
+  @extend %clearfix;
+}
+
+.stories-menu {
+  color: rgba(230,230,230,1);
+  font-family: Hack, monospace;
+  font-size: 12px;
+
+  padding: 5px 5px 5px 5px;
+  display: block;
+  @include box-sizing(border-box);
+  border: 1px solid rgba(230,230,230,1);
+  border-radius: 2px;
+  // background-color: rgba(30,30,70,1);
+  background-color: rgba(30,30,50,1);
+  @extend %clearfix;
+
+  .menu-btn-group {
+    float: right;
+
+    .menu-btn {
+      color: rgba(230,230,230,1);
+      font-family: Hack, monospace;
+      font-size: 12px;
+
+      padding: 5px 5px 5px 5px;
+      display: block;
+      @include box-sizing(border-box);
+      border: 1px solid rgba(230,230,230,1);
+      border-radius: 2px;
+      background-color: rgba(30,30,70,1);
+      @include user-select;
+      cursor: default;
+
+      .btn-text {
+
+      }
+
+      &:hover {
+        background-color: rgba(30,30,100,1);
+      }
+    }
+  }
+}

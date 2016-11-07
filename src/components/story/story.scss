@@ -1,0 +1,81 @@
+@import "../common.scss";
+
+.story {
+  padding: 5px 5px 5px 5px;
+  display: block;
+  @include box-sizing(border-box);
+  border: 1px solid rgba(230,230,230,1);
+  border-radius: 2px;
+  margin-bottom: 5px;
+  background-color: rgba(30,30,50,1);
+
+  &:hover{
+    // -webkit-box-shadow: 0px 0px 2px 1px rgba(40, 200, 250, .75);
+    // -moz-box-shadow: 0px 0px 2px 1px rgba(40, 200, 250, .75);
+    // box-shadow: 0px 0px 2px 1px rgba(40, 200, 250, .75);
+    border: 1px solid rgba(255,255,255,1);
+  }
+
+  &:last-child {
+    margin-bottom: 0px;
+  }
+
+  .opt-btn-group {
+    color: rgba(200,200,200,1);
+    float: right;
+
+    i {
+      color: rgba(200,200,200,1);
+
+      &:hover {
+        color: rgba(230,230,230,1);
+      }
+    }
+  }
+
+  .story-title {
+    color: rgba(230,230,230,1);
+    font-family: Hack, monospace;
+    font-size: 14px;
+    padding-bottom: 5px;
+  }
+
+  .story-desc {
+    color: rgba(230,230,230,1);
+    font-family: Hack, monospace;
+    font-size: 12px;
+
+    padding: 5px 5px 5px 5px;
+    display: block;
+    @include box-sizing(border-box);
+    border: 1px solid rgba(230,230,230,1);
+    border-radius: 2px;
+    background-color: rgba(30,30,70,1);
+
+    line-height: 1.4;
+    height: 25px;
+    overflow: hidden;
+
+    &.expanded {
+      height: auto;
+      overflow: auto;
+    }
+  }
+
+
+}
+.story-modal {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(20,20,20,0.8);
+  z-index: 1000;
+
+  .story {
+    margin: 0 auto;
+    width: 70%;
+    margin-top: 20px;
+  }
+}
