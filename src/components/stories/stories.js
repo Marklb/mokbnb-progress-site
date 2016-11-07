@@ -31,97 +31,11 @@ export default class Stories extends React.Component {
       editStoryVals: {
         'storyKey': '',
         'title': '',
-        'desc': ''
+        'desc': '',
+        'isFinished': false
       },
-      stories: [
-        // {'title': 'View user profile', 'desc': 'As a user I can view the profile of my user or another user.'},
-        // {'title': 'View listing', 'desc': 'As a user I can view the listing of a host.'},
-        // {'title': 'View listing', 'desc': 'As a user I can view the listing of a host.'},
-        // {'title': 'View listing', 'desc':
-        // `As a user I can view the listing of a host.
-        // As a user I can view the listing of a host.
-        // As a user I can view the listing of a host.
-        // As a user I can view the listing of a host.
-        // As a user I can view the listing of a host.
-        // As a user I can view the listing of a host.
-        // As a user I can view the listing of a host.
-        // As a user I can view the listing of a host.
-        // As a user I can view the listing of a host.
-        // As a user I can view the listing of a host.
-        // As a user I can view the listing of a host.
-        // As a user I can view the listing of a host.
-        // As a user I can view the listing of a host.
-        // As a user I can view the listing of a host.
-        // As a user I can view the listing of a host.
-        // As a user I can view the listing of a host.
-        // As a user I can view the listing of a host.
-        // As a user I can view the listing of a host.
-        // As a user I can view the listing of a host.
-        // As a user I can view the listing of a host.
-        // As a user I can view the listing of a host.
-        // As a user I can view the listing of a host.
-        // As a user I can view the listing of a host.`},
-        // {'title': 'View listing', 'desc': 'As a user I can view the listing of a host.'},
-        // {'title': 'View listing', 'desc': 'As a user I can view the listing of a host.'},
-        // {'title': 'View listing', 'desc': 'As a user I can view the listing of a host.'},
-        // {'title': 'View listing', 'desc': 'As a user I can view the listing of a host.'},
-        // {'title': 'View listing', 'desc': 'As a user I can view the listing of a host.'},
-        // {'title': 'View listing', 'desc': 'As a user I can view the listing of a host.'},
-        // {'title': 'View listing', 'desc': 'As a user I can view the listing of a host.'},
-        // {'title': 'View listing', 'desc': 'As a user I can view the listing of a host.'},
-        // {'title': 'View listing', 'desc': 'As a user I can view the listing of a host.'},
-        // {'title': 'View listing', 'desc': 'As a user I can view the listing of a host.'},
-        // {'title': 'View listing', 'desc': 'As a user I can view the listing of a host.'},
-        // {'title': 'View listing', 'desc': 'As a user I can view the listing of a host.'},
-        // {'title': 'View listing', 'desc': 'As a user I can view the listing of a host.'},
-        // {'title': 'Edit listing', 'desc': 'As a host I can edit my listing.'}
-      ]
+      stories: []
     };
-
-    // this.addStory('The new story', 'As a member I should be able to do this.');
-    // this.addStory('View user profile', 'As a user I can view the profile of my user or another user.');
-    // this.addStory('View listing', 'As a user I can view the listing of a host.');
-    // this.addStory('View listing', 'As a user I can view the listing of a host.');
-    // this.addStory('View listing',
-    // `As a user I can view the listing of a host.
-    // As a user I can view the listing of a host.
-    // As a user I can view the listing of a host.
-    // As a user I can view the listing of a host.
-    // As a user I can view the listing of a host.
-    // As a user I can view the listing of a host.
-    // As a user I can view the listing of a host.
-    // As a user I can view the listing of a host.
-    // As a user I can view the listing of a host.
-    // As a user I can view the listing of a host.
-    // As a user I can view the listing of a host.
-    // As a user I can view the listing of a host.
-    // As a user I can view the listing of a host.
-    // As a user I can view the listing of a host.
-    // As a user I can view the listing of a host.
-    // As a user I can view the listing of a host.
-    // As a user I can view the listing of a host.
-    // As a user I can view the listing of a host.
-    // As a user I can view the listing of a host.
-    // As a user I can view the listing of a host.
-    // As a user I can view the listing of a host.
-    // As a user I can view the listing of a host.
-    // As a user I can view the listing of a host.`);
-    // this.addStory('View listing', 'As a user I can view the listing of a host.');
-    // this.addStory('View listing', 'As a user I can view the listing of a host.');
-    // this.addStory('View listing', 'As a user I can view the listing of a host.');
-    // this.addStory('View listing', 'As a user I can view the listing of a host.');
-    // this.addStory('View listing', 'As a user I can view the listing of a host.');
-    // this.addStory('View listing', 'As a user I can view the listing of a host.');
-    // this.addStory('View listing', 'As a user I can view the listing of a host.');
-    // this.addStory('View listing', 'As a user I can view the listing of a host.');
-    // this.addStory('View listing', 'As a user I can view the listing of a host.');
-    // this.addStory('View listing', 'As a user I can view the listing of a host.');
-    // this.addStory('View listing', 'As a user I can view the listing of a host.');
-    // this.addStory('View listing', 'As a user I can view the listing of a host.');
-    // this.addStory('View listing', 'As a user I can view the listing of a host.');
-    // this.addStory('Edit listing', 'As a host I can edit my listing.');
-
-    // this.storiesListRef = firebase.database().ref('stories_list');
 
     this.toggleAddStoryMenuVisibility = this.toggleAddStoryMenuVisibility.bind(this);
     this.addStory = this.addStory.bind(this);
@@ -129,6 +43,7 @@ export default class Stories extends React.Component {
     this.editStory = this.editStory.bind(this);
     this.changeEditStoryVal = this.changeEditStoryVal.bind(this);
     this.deleteStoryFunc = this.deleteStoryFunc.bind(this);
+    this.toggleStoryFinished = this.toggleStoryFinished.bind(this);
 
 
     this.listeningfirebaseRefs = [];
@@ -177,6 +92,7 @@ export default class Stories extends React.Component {
               toggleEditStoryMenuVisibility={this.toggleEditStoryMenuVisibility}
               changeEditStoryVal={this.changeEditStoryVal}
               deleteStoryFunc={this.deleteStoryFunc}
+              toggleStoryFinished={this.toggleStoryFinished}
               /><div className="spacer"></div></div>);
           })}
           {(this.state.stories.length === 0)? this.renderNoStories() : null}
@@ -194,7 +110,8 @@ export default class Stories extends React.Component {
     let newStoryRef = firebase.database().ref('stories_list').push({
       'storyKey': key,
       'title': title,
-      'desc': desc
+      'desc': desc,
+      'isFinished': false
     });
     // newStoryRef.set({
     //   'title': title,
@@ -205,13 +122,14 @@ export default class Stories extends React.Component {
     console.log(path);
   }
 
-  addStoryElement(title, desc, key = null, newStory = false) {
+  addStoryElement(title, desc, isFinished, key = null, newStory = false) {
     // console.log(`key ${key}`);
     let newState = this.state;
     newState.stories.push({
       storyKey: key,
       title: title,
-      desc: desc
+      desc: desc,
+      isFinished: isFinished
     });
     this.setState(newState);
   }
@@ -231,7 +149,8 @@ export default class Stories extends React.Component {
         // this.setState(newState);
         firebase.database().ref('stories_list/' + list[i].storyKey).set({
           title: title,
-          desc: desc
+          desc: desc,
+          isFinished: list[i].isFinished
         });
         break;
       }
@@ -284,6 +203,34 @@ export default class Stories extends React.Component {
     }
   }
 
+  toggleStoryFinished(key){
+    console.log(`toggleStoryFinished ${key}`);
+    // remove()
+    // let newState = this.state;
+    // newState.editStoryVals = {
+    //   'storyKey': key,
+    //   'title': title,
+    //   'desc': desc
+    // }
+    // this.setState(newState);
+    let list = this.state.stories;
+    for(let i = 0; i < list.length; i++){
+      if(list[i].storyKey == key){
+        // console.log(`Found: ${i}  ${list[i].title}`);
+        // let newState = this.state;
+        // this.state.stories[i].title = title;
+        // this.state.stories[i].desc = desc;
+        // this.setState(newState);
+        firebase.database().ref('stories_list/' + list[i].storyKey).set({
+          title: list[i].title,
+          desc: list[i].desc,
+          isFinished: !list[i].isFinished
+        });
+        break;
+      }
+    }
+  }
+
   startDatabaseQueries() {
     console.log('startDatabaseQueries');
     // [START stories_list_query]
@@ -299,12 +246,20 @@ export default class Stories extends React.Component {
         // containerElement.insertBefore(
         //   createPostElement(data.key, data.val().title, data.val().body, author, data.val().uid, data.val().authorPic),
         //   containerElement.firstChild);
-        this.addStoryElement(title, desc, data.key);
+        var isFinished = false;
+        if(data.val().isFinished){
+          isFinished = data.val().isFinished;
+        }
+        this.addStoryElement(title, desc, isFinished, data.key);
       });
       storiesRef.on('child_changed', (data) => {
         // console.log('changed');
         // console.log(data.val());
-        this.editStoryElement(data.val().title, data.val().desc, data.key);
+        var isFinished = false;
+        if(data.val().isFinished){
+          isFinished = data.val().isFinished;
+        }
+        this.editStoryElement(data.val().title, data.val().desc, isFinished, data.key);
     		// var containerElement = sectionElement.getElementsByClassName('posts-container')[0];
     		// var postElement = containerElement.getElementsByClassName('post-' + data.key)[0];
     		// postElement.getElementsByClassName('mdl-card__title-text')[0].innerText = data.val().title;

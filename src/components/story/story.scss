@@ -20,6 +20,22 @@
     margin-bottom: 0px;
   }
 
+  &.finished {
+    .story-title {
+      color: rgba(50,230,50,1);
+    }
+    .opt-btn-group {
+
+      i.finished-check {
+        color: rgba(50,230,50,1);
+
+        &:hover {
+          color: rgba(230,50,50,1);
+        }
+      }
+    }
+  }
+
   .opt-btn-group {
     color: rgba(200,200,200,1);
     float: right;
