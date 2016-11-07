@@ -31,7 +31,7 @@ export default class App extends React.Component {
     // than just react.
     return (
       <Router history={browserHistory}>
-        <Route path='/' component={Container}>
+        <Route path='/mokbnb-progress-site/' component={Container}>
           <IndexRoute component={Stories} />
           {/* <Route path='/inbox' component={Inbox} />
           <Route path='/rooms' component={UsersRooms} />
