@@ -5,6 +5,7 @@ import { Router, Route, Link, IndexRoute, hashHistory, browserHistory } from 're
 import _ from 'lodash';
 import Story from '../story';
 import AddStoryMenu from '../add-story-menu';
+import EditStoryMenu from '../edit-story-menu';
 // import UserSessionHandler from '../../user-session-handler';
 
 // React Components
@@ -26,6 +27,12 @@ export default class Stories extends React.Component {
 
     this.state = {
       addStoryMenuVisible: false,
+      editStoryMenuVisible: false,
+      editStoryVals: {
+        'storyKey': '',
+        'title': '',
+        'desc': ''
+      },
       stories: [
         // {'title': 'View user profile', 'desc': 'As a user I can view the profile of my user or another user.'},
         // {'title': 'View listing', 'desc': 'As a user I can view the listing of a host.'},
@@ -118,6 +125,11 @@ export default class Stories extends React.Component {
 
     this.toggleAddStoryMenuVisibility = this.toggleAddStoryMenuVisibility.bind(this);
     this.addStory = this.addStory.bind(this);
+    this.toggleEditStoryMenuVisibility = this.toggleEditStoryMenuVisibility.bind(this);
+    this.editStory = this.editStory.bind(this);
+    this.changeEditStoryVal = this.changeEditStoryVal.bind(this);
+    this.deleteStoryFunc = this.deleteStoryFunc.bind(this);
+
 
     this.listeningfirebaseRefs = [];
     this.startDatabaseQueries();
@@ -128,6 +140,17 @@ export default class Stories extends React.Component {
       <div className="no-stories-panel">
         No stories. Either you are done (Probably not!) or should should add some.
       </div>
+    );
+  }
+
+  renderEditMenu() {
+    console.log('Rend');
+    return (
+      <EditStoryMenu {...this.state.editStoryVals}
+        changeEditStoryVal={this.changeEditStoryVal}
+        isVisible={this.state.editStoryMenuVisible}
+        onClickModalOuter={this.toggleEditStoryMenuVisibility}
+        editStoryFunc={this.editStory}></EditStoryMenu>
     );
   }
 
@@ -150,7 +173,11 @@ export default class Stories extends React.Component {
 
           <div className="spacer"></div>
           {this.state.stories.map((val, i) => {
-            return (<div key={i}><Story {...val} /><div className="spacer"></div></div>);
+            return (<div key={i}><Story {...val}
+              toggleEditStoryMenuVisibility={this.toggleEditStoryMenuVisibility}
+              changeEditStoryVal={this.changeEditStoryVal}
+              deleteStoryFunc={this.deleteStoryFunc}
+              /><div className="spacer"></div></div>);
           })}
           {(this.state.stories.length === 0)? this.renderNoStories() : null}
         </div>
@@ -158,12 +185,14 @@ export default class Stories extends React.Component {
         <AddStoryMenu isVisible={this.state.addStoryMenuVisible}
           onClickModalOuter={this.toggleAddStoryMenuVisibility}
           addStoryFunc={this.addStory}></AddStoryMenu>
+        {(this.state.editStoryMenuVisible === true)? this.renderEditMenu() : null}
       </div>
     );
   }
 
   addStory(title, desc, key = null, newStory = false) {
     let newStoryRef = firebase.database().ref('stories_list').push({
+      'storyKey': key,
       'title': title,
       'desc': desc
     });
@@ -177,12 +206,82 @@ export default class Stories extends React.Component {
   }
 
   addStoryElement(title, desc, key = null, newStory = false) {
+    // console.log(`key ${key}`);
     let newState = this.state;
     newState.stories.push({
+      storyKey: key,
       title: title,
       desc: desc
     });
     this.setState(newState);
+  }
+
+  editStory(title, desc, key) {
+    // console.log('editStory');
+    // console.log(key);
+    // console.log(title);
+    // console.log(desc);
+    let list = this.state.stories;
+    for(let i = 0; i < list.length; i++){
+      if(list[i].storyKey == key){
+        // console.log(`Found: ${i}  ${list[i].title}`);
+        // let newState = this.state;
+        // this.state.stories[i].title = title;
+        // this.state.stories[i].desc = desc;
+        // this.setState(newState);
+        firebase.database().ref('stories_list/' + list[i].storyKey).set({
+          title: title,
+          desc: desc
+        });
+        break;
+      }
+    }
+  }
+
+  editStoryElement(title, desc, key) {
+    // console.log('editStory');
+    // console.log(key);
+    // console.log(title);
+    // console.log(desc);
+    let list = this.state.stories;
+    for(let i = 0; i < list.length; i++){
+      if(list[i].storyKey == key){
+        // console.log(`Found: ${i}  ${list[i].title}`);
+        let newState = this.state;
+        this.state.stories[i].title = title;
+        this.state.stories[i].desc = desc;
+        this.setState(newState);
+        // firebase.database().ref('stories_list/' + list[i].storyKey).set({
+        //   title: title,
+        //   desc: desc
+        // });
+        break;
+      }
+    }
+  }
+
+  deleteStoryFunc(key){
+    console.log(`deleteStoryFunc ${key}`);
+    // remove()
+    // let newState = this.state;
+    // newState.editStoryVals = {
+    //   'storyKey': key,
+    //   'title': title,
+    //   'desc': desc
+    // }
+    // this.setState(newState);
+    let list = this.state.stories;
+    for(let i = 0; i < list.length; i++){
+      if(list[i].storyKey == key){
+        // console.log(`Found: ${i}  ${list[i].title}`);
+        // let newState = this.state;
+        // this.state.stories[i].title = title;
+        // this.state.stories[i].desc = desc;
+        // this.setState(newState);
+        firebase.database().ref('stories_list/' + list[i].storyKey).remove();
+        break;
+      }
+    }
   }
 
   startDatabaseQueries() {
@@ -193,7 +292,7 @@ export default class Stories extends React.Component {
 
     var fetchStories = (storiesRef, sectionElement = null) => {
       storiesRef.on('child_added', (data) => {
-        console.log('childChanged');
+        // console.log('childChanged');
         var title = data.val().title || 'No Title';
         var desc = data.val().desc || 'No Description';
         // var containerElement = sectionElement.getElementsByClassName('posts-container')[0];
@@ -203,6 +302,9 @@ export default class Stories extends React.Component {
         this.addStoryElement(title, desc, data.key);
       });
       storiesRef.on('child_changed', (data) => {
+        // console.log('changed');
+        // console.log(data.val());
+        this.editStoryElement(data.val().title, data.val().desc, data.key);
     		// var containerElement = sectionElement.getElementsByClassName('posts-container')[0];
     		// var postElement = containerElement.getElementsByClassName('post-' + data.key)[0];
     		// postElement.getElementsByClassName('mdl-card__title-text')[0].innerText = data.val().title;
@@ -211,6 +313,22 @@ export default class Stories extends React.Component {
     		// postElement.getElementsByClassName('star-count')[0].innerText = data.val().starCount;
       });
       storiesRef.on('child_removed', (data) => {
+        let list = this.state.stories;
+        for(let i = 0; i < list.length; i++){
+          if(list[i].storyKey == data.key){
+            // console.log(`Found: ${i}  ${list[i].title}`);
+            // let newState = this.state;
+            // this.state.stories[i].title = title;
+            // this.state.stories[i].desc = desc;
+            // this.setState(newState);
+            // firebase.database().ref('stories_list/' + list[i].storyKey).remove();
+
+            let newState = this.state;
+            newState.stories.splice(i, 1);
+            this.setState(newState);
+            break;
+          }
+        }
     		// var containerElement = sectionElement.getElementsByClassName('posts-container')[0];
     		// var post = containerElement.getElementsByClassName('post-' + data.key)[0];
   	    // post.parentElement.removeChild(post);
@@ -230,6 +348,20 @@ export default class Stories extends React.Component {
   */
   toggleAddStoryMenuVisibility() {
     this.setState({addStoryMenuVisible: !this.state.addStoryMenuVisible});
+  }
+
+  toggleEditStoryMenuVisibility() {
+    this.setState({editStoryMenuVisible: !this.state.editStoryMenuVisible});
+  }
+
+  changeEditStoryVal(title, desc, key){
+    let newState = this.state;
+    newState.editStoryVals = {
+      'storyKey': key,
+      'title': title,
+      'desc': desc
+    }
+    this.setState(newState);
   }
 
 
