@@ -29,20 +29,27 @@ export default class App extends React.Component {
     // It is probably better that we stick with browserHistory, since the urls are cleaner and we
     // are being served by express incase we need any thing more advanced that requires more
     // than just react.
+
     return (
-      <Router history={browserHistory}>
-        <Route path='/mokbnb-progress-site/' component={Container}>
-          <IndexRoute component={Stories} />
-          {/* <Route path='/inbox' component={Inbox} />
-          <Route path='/rooms' component={UsersRooms} />
-          <Route path='/trips/current' component={UsersTrips} />
-          <Route path='/users/edit' component={UsersEdit} />
-          <Route path='/users/notifications' component={UsersNotifications} />
-          <Route path='/s/:place' component={FilterForm} /> */}
-          <Route path='*' component={NotFound} />
-        </Route>
-      </Router>
+      <Container>
+        <Stories></Stories>
+      </Container>
     );
+
+    // return (
+    //   <Router history={browserHistory}>
+    //     <Route path='/mokbnb-progress-site/' component={Container}>
+    //       <IndexRoute component={Stories} />
+    //       {/* <Route path='/inbox' component={Inbox} />
+    //       <Route path='/rooms' component={UsersRooms} />
+    //       <Route path='/trips/current' component={UsersTrips} />
+    //       <Route path='/users/edit' component={UsersEdit} />
+    //       <Route path='/users/notifications' component={UsersNotifications} />
+    //       <Route path='/s/:place' component={FilterForm} /> */}
+    //       <Route path='*' component={NotFound} />
+    //     </Route>
+    //   </Router>
+    // );
   }
 
 };
